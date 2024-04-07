@@ -1,0 +1,5 @@
+.env
+go-rss.exe
+go-rss
+.vscode/
+vendor/
