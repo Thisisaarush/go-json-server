@@ -14,6 +14,10 @@ import (
 	_ "github.com/lib/pq"
 )
 
+type apiConfig struct {
+	DB *database.Queries
+}
+
 func main() {
 	// PORT
 	godotenv.Load(".env")
@@ -21,28 +25,22 @@ func main() {
 	if PORT == "" {
 		PORT = "8000"
 	}
-
-	type apiConfig struct {
-		DB *database.Queries
-	}
 	DB_URL := os.Getenv("DB_URL")
 	if DB_URL == "" {
 		log.Fatal("DB_URL is not set")
 	}
-
+	// DB
 	conn, err := sql.Open("postgres", DB_URL)
 	if err != nil {
 		log.Fatal("Error connecting to database: ", err)
 	}
+	apiCfg := apiConfig{ DB: database.New(conn) }
 
-	apiCfg := &apiConfig{	DB: database.New(conn) }
-
-	
-
- // Router
+	// Routers
 	router := chi.NewRouter()
+	v1Router := chi.NewRouter()
 
-	// Cors
+	// Middlerwares
 	router.Use(cors.Handler(cors.Options{
     AllowedOrigins:   []string{"https://*", "http://*"},
     AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -52,11 +50,12 @@ func main() {
     MaxAge:           300, 
   }))
 	
-	v1Router := chi.NewRouter()
+	// Routes
 	v1Router.Get("/healthz", handlerReadiness)
 	v1Router.Get("/error", handlerErr)
 	v1Router.Post("/users", apiCfg.handlerCreateUser)
 
+	// Mounting
 	router.Mount("/v1", v1Router)
 
 	log.Printf("Server started on port %s", PORT)
