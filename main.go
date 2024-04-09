@@ -53,6 +53,7 @@ func main() {
 	// Routes
 	v1Router.Get("/healthz", handlerReadiness)
 	v1Router.Get("/error", handlerErr)
+	v1Router.Get("/users", apiCfg.handlerGetUser)
 	v1Router.Post("/users", apiCfg.handlerCreateUser)
 
 	// Mounting
