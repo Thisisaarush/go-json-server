@@ -9,7 +9,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
-	"github.com/thisisaarush/go-rss/internal/database"
+	"github.com/thisisaarush/go-json-server/internal/database"
 
 	_ "github.com/lib/pq"
 )

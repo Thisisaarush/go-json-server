@@ -1,4 +1,4 @@
-# GO RSS SERVER
+# GO JSON SERVER
 
 ## Prerequisites
 
@@ -15,8 +15,8 @@ go mod vendor
 ## Run the server
 
 ```bash
-go build && ./go-rss # for linux or mac
-go build && ./go-rss.exe # for windows
+go build && ./go-json-server # for linux or mac
+go build && ./go-json-server.exe # for windows
 ```
 
 ## Common commands for sqlc and goose library

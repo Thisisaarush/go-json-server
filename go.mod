@@ -1,4 +1,4 @@
-module github.com/thisisaarush/go-rss
+module github.com/thisisaarush/go-json-server
 
 go 1.22.1
 

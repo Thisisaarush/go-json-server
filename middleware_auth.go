@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/thisisaarush/go-rss/internal/auth"
-	"github.com/thisisaarush/go-rss/internal/database"
+	"github.com/thisisaarush/go-json-server/internal/auth"
+	"github.com/thisisaarush/go-json-server/internal/database"
 )
 
 type authHandler func(http.ResponseWriter, *http.Request, database.User)
